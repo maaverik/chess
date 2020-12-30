@@ -1,12 +1,6 @@
 import React from "react";
-import "./App.css";
 import $ from "jquery";
-import {
-  onDragStart,
-  onDrop,
-  onSnapEnd,
-  updateStatus,
-} from "./chessBoardUtils";
+import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
 
 // This is a bit of a hack to declare jquery on the window object. It also makes it possible to call window.chessBoard further below
 window.$ = window.jQuery = $;
@@ -20,9 +14,6 @@ export default class App extends React.Component {
       "https://chessboardjs.com/img/chesspieces/alpha/{piece}.png";
 
     this.board = null;
-    // this.$status = $("#status");
-    // this.$fen = $("#fen");
-    // this.$pgn = $("#pgn");
 
     this.config = {
       pieceTheme: themePath,
