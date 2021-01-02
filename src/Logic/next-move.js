@@ -1,11 +1,11 @@
 import { minimaxInit } from "./minimax";
-import { board } from "../ChessBoard";
+import { chessBoard } from "../ChessBoard";
 import $ from "jquery";
 
 export const makeBestMove = (game) => {
   const bestMove = getBestMove(game);
   game.move(bestMove);
-  board.position(game.fen());
+  chessBoard.position(game.fen());
   //   renderMoveHistory(game.history());
   if (game.game_over()) {
     alert("Game over");

@@ -4,6 +4,7 @@ import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
 
 // This is a bit of a hack to declare jquery on the window object. It also makes it possible to call window.chessBoard further below
 window.$ = window.jQuery = $;
+let chessBoard; // making global since this object needs to be used elsewhere
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,12 +30,12 @@ export default class App extends React.Component {
     if (window && !window.ChessBoard) return;
     if (window && !window.$) return;
 
-    this.chessBoard = window.ChessBoard(this.boardId, this.config);
+    chessBoard = window.ChessBoard(this.boardId, this.config);
     // this.chessBoard = window.ChessBoard(this.boardId, this.defaultConfig);
   }
 
   componentWillUnmount() {
-    this.chessBoard.destroy();
+    chessBoard.destroy();
   }
 
   render() {
@@ -49,3 +50,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export { chessBoard };
