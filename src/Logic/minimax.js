@@ -5,10 +5,10 @@ import { evaluateBoard } from "./board-evaluation";
 export const minimaxInit = (game, depth, isMaximisingPlayer) => {
   let bestScore = Number.NEGATIVE_INFINITY,
     finalMove;
-  const possibleMoves = game.ugly_moves();
+  const possibleMoves = game.moves();
 
   for (const move of possibleMoves) {
-    game.ugly_move(move);
+    game.move(move);
     const score = minimax(
       game,
       depth - 1,
@@ -33,10 +33,10 @@ const minimax = (game, depth, isMaximisingPlayer, alpha, beta) => {
   let bestScore;
   if (isMaximisingPlayer) {
     bestScore = Number.NEGATIVE_INFINITY;
-    const possibleMoves = game.ugly_moves();
+    const possibleMoves = game.moves();
 
     for (const move of possibleMoves) {
-      game.ugly_move(move);
+      game.move(move);
       bestScore = Math.max(
         bestScore,
         minimax(game, depth - 1, false, alpha, beta)
@@ -51,10 +51,10 @@ const minimax = (game, depth, isMaximisingPlayer, alpha, beta) => {
     }
   } else {
     bestScore = Number.POSITIVE_INFINITY;
-    const possibleMoves = game.ugly_moves();
+    const possibleMoves = game.moves();
 
     for (const move of possibleMoves) {
-      game.ugly_move(move);
+      game.move(move);
       bestScore = Math.min(
         bestScore,
         minimax(game, depth - 1, true, alpha, beta)
