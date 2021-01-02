@@ -1,10 +1,10 @@
 // https://www.chessprogramming.org/Simplified_Evaluation_Function
 // https://github.com/thomasahle/sunfish/blob/master/sunfish.py
 
-// piece values
+// piece values -> represents relative importance of each piece
 export const pieceScores = { p: 100, n: 320, b: 330, r: 500, q: 900, k: 20000 };
 
-// piece square tables
+// piece square tables -> represents favourable board positions of each piece
 export const pst_w = {
   p: [
     [100, 100, 100, 100, 105, 100, 100, 100],

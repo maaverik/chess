@@ -33,5 +33,5 @@ const getPieceValue = (piece, x, y) => {
   };
 
   const absoluteValue = getAbsoluteValue(piece, piece.color === "w", x, y);
-  return piece.color === "w" ? absoluteValue : -absoluteValue;
+  return piece.color === "w" ? absoluteValue : -absoluteValue; // black pieces have negative score
 };
