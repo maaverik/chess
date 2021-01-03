@@ -46,6 +46,7 @@ const minimax = (game, depth, isMaximisingPlayer, alpha, beta) => {
       alpha = Math.max(alpha, bestScore);
       if (beta <= alpha) {
         // pruning
+        console.log(`Pruned at depth ${depth}`);
         return bestScore;
       }
     }
@@ -64,6 +65,7 @@ const minimax = (game, depth, isMaximisingPlayer, alpha, beta) => {
       beta = Math.min(beta, bestScore);
       if (beta <= alpha) {
         // pruning
+        console.log(`Pruned at depth ${depth}`);
         return bestScore;
       }
     }

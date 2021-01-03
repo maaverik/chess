@@ -1,4 +1,4 @@
-import ChessBoard, { board } from "./Chessboard";
+import ChessBoard, { chessBoardObj } from "./Chessboard";
 
 export default ChessBoard;
-export { board };
+export { chessBoardObj };

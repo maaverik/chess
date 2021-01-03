@@ -1,7 +1,7 @@
 import Chess from "chess.js";
 import $ from "jquery";
 import { makeBestMove } from "../Logic/next-move";
-import { chessBoard } from "./Chessboard";
+import { chessBoardObj } from "./Chessboard";
 
 const game = new Chess();
 
@@ -69,5 +69,5 @@ export const onDrop = (source, target) => {
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
 export const onSnapEnd = () => {
-  chessBoard.position(game.fen());
+  chessBoardObj.position(game.fen());
 };
