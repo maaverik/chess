@@ -4,7 +4,7 @@ import $ from "jquery";
 
 export const makeBestMove = (game) => {
   const bestMove = getBestMove(game);
-  game.move(bestMove);
+  game.ugly_move(bestMove);
   chessBoardObj.position(game.fen());
   //   renderMoveHistory(game.history());
   if (game.game_over()) {

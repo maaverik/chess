@@ -1,4 +1,4 @@
-import Chess from "chess.js";
+import Chess from "../lib/chess";
 import $ from "jquery";
 import { makeBestMove } from "../Logic/next-move";
 import { chessBoardObj } from "./Chessboard";
