@@ -3,6 +3,8 @@ import $ from "jquery";
 import { makeBestMove } from "../Logic/next-move";
 import { chessBoardObj } from "./Chessboard";
 
+// utilizing a modified version of chess.js from https://github.com/lhartikk/simple-chess-ai/blob/master/lib/js/chess.js
+// the original one's move functions were upto 5 times slower
 const game = new Chess();
 
 const updateStatus = () => {

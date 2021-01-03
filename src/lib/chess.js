@@ -831,8 +831,8 @@ var Chess = function (fen) {
     }
 
     if (
-      (tokens[3][1] == "3" && tokens[1] == "w") ||
-      (tokens[3][1] == "6" && tokens[1] == "b")
+      (tokens[3][1] === "3" && tokens[1] === "w") ||
+      (tokens[3][1] === "6" && tokens[1] === "b")
     ) {
       return { valid: false, error_number: 11, error: errors[11] };
     }
@@ -846,7 +846,7 @@ var Chess = function (fen) {
     var fen = "";
 
     for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
-      if (board[i] == null) {
+      if (board[i] === null) {
         empty++;
       } else {
         if (empty > 0) {
@@ -946,8 +946,8 @@ var Chess = function (fen) {
 
     /* don't let the user place more than one king */
     if (
-      piece.type == KING &&
-      !(kings[piece.color] == EMPTY || kings[piece.color] == sq)
+      piece.type === KING &&
+      !(kings[piece.color] === EMPTY || kings[piece.color] === sq)
     ) {
       return false;
     }
@@ -1046,19 +1046,19 @@ var Chess = function (fen) {
       }
 
       var piece = board[i];
-      if (piece == null || piece.color !== us) {
+      if (piece === null || piece.color !== us) {
         continue;
       }
 
       if (piece.type === PAWN) {
         /* single square, non-capturing */
         var square = i + PAWN_OFFSETS[us][0];
-        if (board[square] == null) {
+        if (board[square] === null) {
           add_move(board, moves, i, square, BITS.NORMAL);
 
           /* double square */
           var square = i + PAWN_OFFSETS[us][1];
-          if (second_rank[us] === rank(i) && board[square] == null) {
+          if (second_rank[us] === rank(i) && board[square] === null) {
             add_move(board, moves, i, square, BITS.BIG_PAWN);
           }
         }
@@ -1083,7 +1083,7 @@ var Chess = function (fen) {
             square += offset;
             if (square & 0x88) break;
 
-            if (board[square] == null) {
+            if (board[square] === null) {
               add_move(board, moves, i, square, BITS.NORMAL);
             } else {
               if (board[square].color === us) break;
@@ -1108,8 +1108,8 @@ var Chess = function (fen) {
         var castling_to = castling_from + 2;
 
         if (
-          board[castling_from + 1] == null &&
-          board[castling_to] == null &&
+          board[castling_from + 1] === null &&
+          board[castling_to] === null &&
           !attacked(them, kings[us]) &&
           !attacked(them, castling_from + 1) &&
           !attacked(them, castling_to)
@@ -1124,9 +1124,9 @@ var Chess = function (fen) {
         var castling_to = castling_from - 2;
 
         if (
-          board[castling_from - 1] == null &&
-          board[castling_from - 2] == null &&
-          board[castling_from - 3] == null &&
+          board[castling_from - 1] === null &&
+          board[castling_from - 2] === null &&
+          board[castling_from - 3] === null &&
           !attacked(them, kings[us]) &&
           !attacked(them, castling_from - 1) &&
           !attacked(them, castling_to)
@@ -1221,7 +1221,7 @@ var Chess = function (fen) {
       }
 
       /* if empty square or wrong color */
-      if (board[i] == null || board[i].color !== color) continue;
+      if (board[i] === null || board[i].color !== color) continue;
 
       var piece = board[i];
       var difference = i - square;
@@ -1302,15 +1302,13 @@ var Chess = function (fen) {
     if (num_pieces === 2) {
       return true;
     } else if (
-
-    /* k vs. kn .... or .... k vs. kb */
+      /* k vs. kn .... or .... k vs. kb */
       num_pieces === 3 &&
       (pieces[BISHOP] === 1 || pieces[KNIGHT] === 1)
     ) {
       return true;
     } else if (num_pieces === pieces[BISHOP] + 2) {
-
-    /* kb vs. kb where any number of bishops are all on the same color */
+      /* kb vs. kb where any number of bishops are all on the same color */
       var sum = 0;
       var len = bishops.length;
       for (var i = 0; i < len; i++) {
@@ -1469,7 +1467,7 @@ var Chess = function (fen) {
 
   function undo_move() {
     var old = history.pop();
-    if (old == null) {
+    if (old === null) {
       return null;
     }
 
@@ -1557,12 +1555,12 @@ var Chess = function (fen) {
       if (same_rank > 0 && same_file > 0) {
         return algebraic(from);
       } else if (same_file > 0) {
-      /* if the moving piece rests on the same file, use the rank symbol as the
-       * disambiguator
-       */
+        /* if the moving piece rests on the same file, use the rank symbol as the
+         * disambiguator
+         */
         return algebraic(from).charAt(1);
       } else {
-      /* else use the file symbol */
+        /* else use the file symbol */
         return algebraic(from).charAt(0);
       }
     }
@@ -1579,7 +1577,7 @@ var Chess = function (fen) {
       }
 
       /* empty piece */
-      if (board[i] == null) {
+      if (board[i] === null) {
         s += " . ";
       } else {
         var piece = board[i].type;
@@ -1631,10 +1629,10 @@ var Chess = function (fen) {
       } else {
         if (
           matches &&
-          (!piece || piece.toLowerCase() == moves[i].piece) &&
-          SQUARES[from] == moves[i].from &&
-          SQUARES[to] == moves[i].to &&
-          (!promotion || promotion.toLowerCase() == moves[i].promotion)
+          (!piece || piece.toLowerCase() === moves[i].piece) &&
+          SQUARES[from] === moves[i].from &&
+          SQUARES[to] === moves[i].to &&
+          (!promotion || promotion.toLowerCase() === moves[i].promotion)
         ) {
           return moves[i];
         }
@@ -1857,7 +1855,7 @@ var Chess = function (fen) {
         row = [];
 
       for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
-        if (board[i] == null) {
+        if (board[i] === null) {
           row.push(null);
         } else {
           row.push({ type: board[i].type, color: board[i].color });
@@ -2086,7 +2084,7 @@ var Chess = function (fen) {
         /* move not possible! (don't clear the board to examine to show the
          * latest valid position)
          */
-        if (move == null) {
+        if (move === null) {
           return false;
         } else {
           make_move(move);
@@ -2101,7 +2099,7 @@ var Chess = function (fen) {
         }
       } else {
         move = move_from_san(move, sloppy);
-        if (move == null) {
+        if (move === null) {
           return false;
         } else {
           make_move(move);
