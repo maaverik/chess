@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import $ from "jquery";
 import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
+import "../index.css";
 
 // This is a bit of a hack to declare jquery on the window object. It also makes it possible to call window.chessBoard further below
 window.$ = window.jQuery = $;
@@ -31,7 +32,7 @@ export const App = () => {
 
   return (
     <div className="App">
-      <div id={boardId} style={{ width: "400px" }} ref={boardRef}></div>
+      <div className="Board" id={boardId} ref={boardRef}></div>
     </div>
   );
 };
