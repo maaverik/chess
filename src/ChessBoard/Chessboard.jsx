@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import $ from "jquery";
 import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
 
@@ -6,49 +6,35 @@ import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
 window.$ = window.jQuery = $;
 let chessBoardObj; // making global since this object needs to be used elsewhere
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.boardRef = React.createRef();
-    this.boardId = "board1";
-    const themePath =
-      "https://chessboardjs.com/img/chesspieces/alpha/{piece}.png";
+export const App = () => {
+  const boardRef = React.createRef();
+  const boardId = "board1";
+  const themePath =
+    "https://chessboardjs.com/img/chesspieces/alpha/{piece}.png";
 
-    this.board = null;
+  const config = {
+    pieceTheme: themePath,
+    draggable: true,
+    position: "start",
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onSnapEnd: onSnapEnd,
+  };
 
-    this.config = {
-      pieceTheme: themePath,
-      draggable: true,
-      position: "start",
-      onDragStart: onDragStart,
-      onDrop: onDrop,
-      onSnapEnd: onSnapEnd,
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     if (window && !window.ChessBoard) return;
     if (window && !window.$) return;
 
-    chessBoardObj = window.ChessBoard(this.boardId, this.config);
-    // this.chessBoard = window.ChessBoard(this.boardId, this.defaultConfig);
-  }
+    chessBoardObj = window.ChessBoard(boardId, config);
+    return () => chessBoardObj.destroy();
+  });
 
-  componentWillUnmount() {
-    chessBoardObj.destroy();
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <div
-          id={this.boardId}
-          style={{ width: "400px" }}
-          ref={this.boardRef}
-        ></div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <div id={boardId} style={{ width: "400px" }} ref={boardRef}></div>
+    </div>
+  );
+};
 
 export { chessBoardObj };
+export default App;
