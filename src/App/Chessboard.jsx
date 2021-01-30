@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import $ from "jquery";
 import { onDragStart, onDrop, onSnapEnd } from "./chessBoardUtils";
 import "../index.css";
+import Options from "./Options";
 
 // This is a bit of a hack to declare jquery on the window object. It also makes it possible to call window.chessBoard further below
 window.$ = window.jQuery = $;
 let chessBoardObj; // making global since this object needs to be used elsewhere
 
-export const App = () => {
+export const ChessBoard = () => {
   const boardRef = React.createRef();
-  const boardId = "board1";
+  const boardId = "board";
   const themePath =
     "https://chessboardjs.com/img/chesspieces/alpha/{piece}.png";
 
@@ -33,9 +34,10 @@ export const App = () => {
   return (
     <div className="App">
       <div className="Board" id={boardId} ref={boardRef}></div>
+      <Options className="Buttons" />
     </div>
   );
 };
 
 export { chessBoardObj };
-export default App;
+export default ChessBoard;

@@ -4,7 +4,7 @@ import { makeBestMove } from "../Logic/next-move";
 import { chessBoardObj } from "./Chessboard";
 
 // utilizing a modified version of chess.js from https://github.com/lhartikk/simple-chess-ai/blob/master/lib/js/chess.js
-// the original one's move functions were upto 5 times slower
+// the original one's move functions were about 5 times slower
 const game = new Chess();
 
 const updateStatus = () => {
@@ -63,7 +63,7 @@ export const onDrop = (source, target) => {
 
   // illegal move
   if (move === null) return "snapback";
-  const board = $("#board1");
+  const board = $("#board");
   window.setTimeout(makeBestMove, 250, game, board);
   updateStatus();
 };
@@ -73,3 +73,5 @@ export const onDrop = (source, target) => {
 export const onSnapEnd = () => {
   chessBoardObj.position(game.fen());
 };
+
+export { game };
